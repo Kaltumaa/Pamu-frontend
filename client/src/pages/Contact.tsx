@@ -99,7 +99,7 @@ const Contact: React.FC = () => {
 
       <ContactHero />
 
-      <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16 grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-16 grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Contact Info */}
         <div>
           <h2 className="text-2xl font-bold mb-6">Our Offices</h2>

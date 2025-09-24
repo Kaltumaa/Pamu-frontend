@@ -42,7 +42,7 @@ const services: Service[] = [
     image: img3,
     title: "Land Freight",
     description: "Reliable road and rail freight services across East Africa.",
-    features: ["Cross-border Transport", "Modern Fleet", "Real-time Tracking"],
+    features: ["Cross-border Transport", "Modern Fleet"],
   },
   {
     key: "air",

@@ -3,9 +3,9 @@ import servicesHeroImage from "@/assets/images/service.jpg"; // adjust path to m
 
 const ServiceHero = () => {
   return (
-    <section className="relative w-full mt-4 lg:mt-6 mb-12 lg:mb-16 flex justify-center">
+    <section className="relative w-full mt-4 lg:mt-6 mb-0 lg:mb-0 flex justify-center">
       {/* Hero container slightly wider */}
-      <div className="w-full max-w-[95%] md:max-w-[92%] lg:max-w-[98%] h-[250px] md:h-[350px] lg:h-[500px] relative">
+      <div className="w-full max-w-[95%] md:max-w-[92%] lg:max-w-[98%] h-[250px] md:h-[350px] lg:h-[450px] relative">
         {/* Background image with rounded corners */}
         <img
           src={servicesHeroImage}

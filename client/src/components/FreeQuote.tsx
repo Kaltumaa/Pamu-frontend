@@ -3,7 +3,7 @@ import "@/styles/Freequote.css";
 import businessmanImage from "@/assets/images/bg_1.jpg";
 import { submitQuote } from "@/api";
 
-const FreeQuote = ({ variant = "home", showQuote }) => {
+const FreeQuote = ({ variant = "home" }) => {
   const [formData, setFormData] = useState({
     from: "",
     to: "",
@@ -20,7 +20,9 @@ const FreeQuote = ({ variant = "home", showQuote }) => {
   const [success, setSuccess] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -36,7 +38,6 @@ const FreeQuote = ({ variant = "home", showQuote }) => {
 
     try {
       const result = await submitQuote(formData);
-      console.log("Response:", result);
       setSuccess(result.message || "Quote request sent successfully!");
       setFormData({
         from: "",
@@ -50,7 +51,6 @@ const FreeQuote = ({ variant = "home", showQuote }) => {
         specialRequirements: "",
       });
     } catch (err: any) {
-      console.error("Error:", err);
       setError(err.message || "Failed to send request");
     } finally {
       setLoading(false);
@@ -58,17 +58,16 @@ const FreeQuote = ({ variant = "home", showQuote }) => {
   };
 
   const formContent = (
-    <form onSubmit={handleSubmit} className="quote-form space-y-3">
-      {/* Origin & Destination */}
-      <div className="flex space-x-3">
+    <form onSubmit={handleSubmit} className="quote-form space-y-3 w-full max-w-md mx-auto">
+      <div className="flex flex-col md:flex-row md:space-x-3 space-y-3 md:space-y-0">
         <select
           name="from"
           value={formData.from}
           onChange={handleInputChange}
-          className="form-select w-1/2"
+          className="form-select flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
           required
         >
-          <option value="">From: </option>
+          <option value="">From</option>
           <option value="Kenya">Kenya</option>
           <option value="Somalia">Somalia</option>
           <option value="South Sudan">South Sudan</option>
@@ -76,15 +75,14 @@ const FreeQuote = ({ variant = "home", showQuote }) => {
           <option value="Ethiopia">Ethiopia</option>
           <option value="DRC Congo">DRC Congo</option>
         </select>
-
         <select
           name="to"
           value={formData.to}
           onChange={handleInputChange}
-          className="form-select w-1/2"
+          className="form-select flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
           required
         >
-          <option value="">To: </option>
+          <option value="">To</option>
           <option value="Kenya">Kenya</option>
           <option value="Somalia">Somalia</option>
           <option value="South Sudan">South Sudan</option>
@@ -94,12 +92,11 @@ const FreeQuote = ({ variant = "home", showQuote }) => {
         </select>
       </div>
 
-      {/* Freight Type */}
       <select
         name="freightType"
         value={formData.freightType}
         onChange={handleInputChange}
-        className="form-select w-full"
+        className="form-select w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
         required
       >
         <option value="">Freight Type</option>
@@ -109,13 +106,12 @@ const FreeQuote = ({ variant = "home", showQuote }) => {
         <option value="land">Land Transport</option>
       </select>
 
-      {/* Container Type & Quantity */}
-      <div className="flex space-x-3">
+      <div className="flex flex-col md:flex-row md:space-x-3 space-y-3 md:space-y-0">
         <select
           name="containerType"
           value={formData.containerType}
           onChange={handleInputChange}
-          className="form-select w-1/2"
+          className="form-select flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
           required
         >
           <option value="">Container Type</option>
@@ -130,30 +126,28 @@ const FreeQuote = ({ variant = "home", showQuote }) => {
           onChange={handleInputChange}
           placeholder="Qty"
           min={1}
-          className="form-input w-1/2"
+          className="form-input flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
         />
       </div>
 
-      {/* Company */}
       <input
         type="text"
         name="company"
         value={formData.company}
         onChange={handleInputChange}
         placeholder="Company Name"
-        className="form-input w-full"
+        className="form-input w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
         required
       />
 
-      {/* Contact Info */}
-      <div className="flex space-x-3">
+      <div className="flex flex-col md:flex-row md:space-x-3 space-y-3 md:space-y-0">
         <input
           type="email"
           name="email"
           value={formData.email}
           onChange={handleInputChange}
           placeholder="Email"
-          className="form-input w-1/2"
+          className="form-input flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
           required
         />
         <input
@@ -162,28 +156,26 @@ const FreeQuote = ({ variant = "home", showQuote }) => {
           value={formData.phone}
           onChange={handleInputChange}
           placeholder="Phone"
-          className="form-input w-1/2"
+          className="form-input flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
           required
         />
       </div>
 
-      {/* Special Requirements */}
       <textarea
         name="specialRequirements"
         value={formData.specialRequirements}
         onChange={handleInputChange}
         placeholder="Special requirements (hazmat, temperature, customs, etc.)"
-        className="form-textarea w-full"
+        className="form-textarea w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
         rows={3}
       />
 
-      {/* Feedback */}
-      {success && <p className="text-green-600">{success}</p>}
-      {error && <p className="text-red-600">{error}</p>}
+      {success && <p className="text-green-600 text-center">{success}</p>}
+      {error && <p className="text-red-600 text-center">{error}</p>}
 
       <button
         type="submit"
-        className="w-full bg-red-600 text-white py-3 rounded-md hover:bg-red-700 transition"
+        className="w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition text-base font-medium"
         disabled={loading}
       >
         {loading ? "Sending..." : "SEND MESSAGE →"}
@@ -194,20 +186,20 @@ const FreeQuote = ({ variant = "home", showQuote }) => {
   // ---------------- MODAL VERSION ----------------
   if (variant === "modal") {
     return (
-      <div className="flex w-full max-w-4xl mx-auto bg-white rounded-lg overflow-hidden shadow-xl">
-        <div className="hidden md:block w-1/2">
+      <div className="flex flex-col md:flex-row w-full max-w-3xl mx-auto bg-white rounded-lg overflow-hidden shadow-xl">
+        <div className="hidden md:block md:w-1/2">
           <img
             src={businessmanImage}
             alt="Business"
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="w-full md:w-1/2 p-8 flex flex-col">
-          <div className="mb-6 text-left">
+        <div className="w-full md:w-1/2 p-4 md:p-6 flex flex-col">
+          <div className="mb-4 text-left">
             <span className="block text-sm font-semibold text-red-600 uppercase">
               Request A
             </span>
-            <h1 className="text-3xl font-bold text-gray-900">Free Quote</h1>
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Free Quote</h1>
           </div>
           <div className="flex-grow">{formContent}</div>
         </div>
@@ -216,24 +208,23 @@ const FreeQuote = ({ variant = "home", showQuote }) => {
   }
 
   // ---------------- HOMEPAGE VERSION ----------------
-  return (
-    <section
-      className="free-quote-section py-16"
-      style={{ backgroundImage: `url(${businessmanImage})` }}
-    >
-      <div className="container">
-        <div className="quote-form-box max-w-xl bg-white p-8 rounded-lg shadow-lg">
-          <div className="mb-4 text-left">
-            <span className="block text-sm font-semibold text-black">
-              Request A
-            </span>
-            <h1 className="text-2xl font-bold text-red-600">Free Quote</h1>
-          </div>
-          {formContent}
+return (
+  <section
+    className="free-quote-section py-16 relative min-h-[500px]"
+    style={{ backgroundImage: `url(${businessmanImage})` }}
+  >
+    <div className="absolute inset-0 bg-black/30"></div>
+    <div className="container px-4 relative z-10">
+      <div className="quote-form-box max-w-lg bg-white p-9 rounded-lg shadow-lg min-h-[650px]">
+        <div className="mb-4 text-left">
+          <span className="block text-sm font-semibold text-black">Request A</span>
+          <h1 className="text-2xl md:text-3xl font-bold text-red-600">Free Quote</h1>
         </div>
+        {formContent}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
+}
 
 export default FreeQuote;
