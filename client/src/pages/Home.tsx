@@ -28,7 +28,7 @@ export default function HomePage() {
       <WhatMakesUsSpecial />
       <Stats />
       <About />
-      <FreeQuote showQuote={true} />
+      <FreeQuote />
       <Testimonials />
       <Client />
       <Map />

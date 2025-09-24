@@ -7,7 +7,6 @@ import client1 from "@/assets/images/clients/client1.png";
 import client2 from "@/assets/images/clients/client2.png";
 import client3 from "@/assets/images/clients/client3.png";
 import client4 from "@/assets/images/clients/client4.png";
-import client5 from "@/assets/images/clients/client5.png";
 import client6 from "@/assets/images/clients/client6.png";
 import client7 from "@/assets/images/clients/client7.png";
 import bgImage from "@/assets/images/bg_3.jpg";
@@ -18,7 +17,6 @@ const ClientsSection: React.FC = () => {
     { id: 2, src: client2, alt: "Client 2" },
     { id: 3, src: client3, alt: "Client 3" },
     { id: 4, src: client4, alt: "Client 4" },
-    { id: 5, src: client5, alt: "Client 5" },
     { id: 6, src: client6, alt: "Client 6" },
     { id: 7, src: client7, alt: "Client 7" },
   ];
