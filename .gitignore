@@ -2,3 +2,6 @@ client/.git
 server/.git
 admin/.git
 
+client/client/
+client/server/
+client/admin/
