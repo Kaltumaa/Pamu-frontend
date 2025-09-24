@@ -1,7 +1,4 @@
-client/.git
-server/.git
-admin/.git
-
+node_modules
 client/client/
 client/server/
 client/admin/
