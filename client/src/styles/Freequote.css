@@ -19,7 +19,7 @@
   width: 130%;
   margin-left: 3%; /* push it slightly away from edge */
   margin-top: 40px;
-  margin-bottom: -120px; /* extend lower than background */
+  margin-bottom: 0; /* remove negative margin to prevent overlap */
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
   z-index: 2;
 }

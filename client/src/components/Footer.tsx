@@ -1,42 +1,58 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FaFacebookF, FaLinkedinIn, FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { Phone, Mail, MapPin } from "lucide-react";
-import logo from "@/assets/images/logo_footer.png"; // ✅ update with your actual logo path
+import logo from "@/assets/images/logo_footer.png"; 
+
+// ✅ Import your pages (they’ll be used in App.tsx for routes)
+import Home from "@/pages/Home";
+import About from "@/pages/About";
+import Services from "@/pages/Services";
+import Contact from "@/pages/Contact";
 
 const FooterWithLogo: React.FC = () => {
   return (
     <footer className="w-full bg-white py-6">
       <div className="flex flex-col md:flex-row flex-wrap items-center justify-between gap-y-4 gap-x-8 text-center md:text-left">
+        
         {/* ✅ Logo + Links */}
         <div className="flex flex-col md:flex-row items-center gap-6">
-          {/* ✅ Logo */}
+          {/* Logo */}
           <img src={logo} alt="Pamu Services Logo" className="w-10" />
 
-          {/* ✅ Navigation Links */}
+          {/* Navigation Links */}
           <ul className="flex flex-wrap items-center gap-x-6 text-sm">
             <li>
-              <a
-                href="/about"
-                className="font-normal text-gray-700 transition-colors hover:text-blue-500 focus:text-blue-500"
+              <Link
+                to="/"
+                className="font-normal text-gray-700 transition-colors hover:text-blue-500"
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/about"
+                className="font-normal text-gray-700 transition-colors hover:text-blue-500"
               >
                 About Us
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/services"
-                className="font-normal text-gray-700 transition-colors hover:text-blue-500 focus:text-blue-500"
+              <Link
+                to="/services"
+                className="font-normal text-gray-700 transition-colors hover:text-blue-500"
               >
                 Services
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/contact"
-                className="font-normal text-gray-700 transition-colors hover:text-blue-500 focus:text-blue-500"
+              <Link
+                to="/contact"
+                className="font-normal text-gray-700 transition-colors hover:text-blue-500"
               >
                 Contact Us
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -58,19 +74,17 @@ const FooterWithLogo: React.FC = () => {
         </div>
       </div>
 
-      {/* ✅ Divider */}
+      {/* Divider */}
       <hr className="my-4 border-gray-200" />
 
       {/* ✅ Bottom Row */}
       <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-4">
-        {/* Copyright */}
         <p className="text-center md:text-left text-gray-600 text-sm">
           &copy; {new Date().getFullYear()} Pamu Services Limited. All rights reserved.
         </p>
 
-        {/* ✅ Contact Info (from ) */}
+        {/* Contact Info */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-sm">
-          {/* Email */}
           <a
             href="mailto:info@pamuservices.co.ke"
             className="flex items-center gap-2 text-gray-900 hover:text-[#0C6088]"
@@ -79,7 +93,6 @@ const FooterWithLogo: React.FC = () => {
             <span>info@pamuservices.co.ke</span>
           </a>
 
-          {/* Address */}
           <a
             href="https://www.google.com/maps?q=Mombasa+Trade+Center,+5th+Floor,+Nkrumah+Road,+Mombasa"
             target="_blank"
@@ -90,7 +103,6 @@ const FooterWithLogo: React.FC = () => {
             <span>Mombasa Trade Center, 5th Floor, Nkrumah Road</span>
           </a>
 
-          {/* Phone */}
           <a
             href="tel:+254758002383"
             className="flex items-center gap-2 text-gray-900 hover:text-[#0C6088]"

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 import client1 from "@/assets/images/clients/client1.png";
 import client2 from "@/assets/images/clients/client2.png";
 import client3 from "@/assets/images/clients/client3.png";
@@ -12,8 +11,6 @@ import client7 from "@/assets/images/clients/client7.png";
 import bgImage from "@/assets/images/bg_3.jpg";
 
 const ClientsSection: React.FC = () => {
-  const [isHovered, setIsHovered] = useState(false);
-  
   const clientLogos = [
     { id: 1, src: client1, alt: "Client 1" },
     { id: 2, src: client2, alt: "Client 2" },
@@ -27,67 +24,59 @@ const ClientsSection: React.FC = () => {
     dots: false,
     infinite: true,
     autoplay: true,
-    autoplaySpeed: 3000,
-    speed: 800,
+    autoplaySpeed: 2000,
+    speed: 600,
     slidesToShow: 6,
     slidesToScroll: 1,
-    arrows: isHovered,
+    arrows: false,
     pauseOnHover: true,
-    centerMode: false,
+    swipeToSlide: true,
+    touchThreshold: 10,
     variableWidth: false,
+    adaptiveHeight: false,
+    cssEase: 'linear',
     responsive: [
       { 
         breakpoint: 1400, 
         settings: { 
           slidesToShow: 5,
-          autoplaySpeed: 3000,
-          arrows: isHovered,
+          slidesToScroll: 1,
+          autoplay: true
         } 
       },
       { 
         breakpoint: 1200, 
         settings: { 
           slidesToShow: 4,
-          autoplaySpeed: 3000,
-          arrows: isHovered,
+          slidesToScroll: 1,
+          autoplay: true
         } 
       },
       { 
         breakpoint: 992, 
         settings: { 
           slidesToShow: 3,
-          autoplaySpeed: 2500,
-          arrows: isHovered,
+          slidesToScroll: 1,
+          autoplay: true
         } 
       },
       { 
         breakpoint: 768, 
         settings: { 
           slidesToShow: 2,
-          autoplaySpeed: 2500,
-          centerMode: true,
-          centerPadding: '20px',
-          arrows: isHovered,
-        } 
-      },
-      { 
-        breakpoint: 640, 
-        settings: { 
-          slidesToShow: 1,
-          autoplaySpeed: 2000,
+          slidesToScroll: 1,
           centerMode: false,
-          centerPadding: '0px',
-          arrows: isHovered,
+          autoplay: true
         } 
       },
       { 
         breakpoint: 480, 
         settings: { 
           slidesToShow: 1,
-          autoplaySpeed: 2000,
+          slidesToScroll: 1,
           centerMode: false,
           centerPadding: '0px',
-          arrows: isHovered,
+          autoplay: true
         } 
       },
     ],
@@ -95,29 +84,51 @@ const ClientsSection: React.FC = () => {
 
   return (
     <section
-      className="py-8 md:py-12 lg:py-14 bg-fixed bg-center bg-cover relative"
+      className="py-10 sm:py-12 md:py-14 bg-fixed bg-center bg-cover relative"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
       <div className="absolute inset-0 bg-black/50 z-0" />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 md:mb-6">
-          <span className="block text-gray-200 text-sm sm:text-base md:text-lg mb-1 md:mb-2">SOME OF OUR</span>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">
+          <span className="block text-gray-200 text-sm sm:text-base md:text-lg mb-1 sm:mb-2">
+            SOME OF OUR
+          </span>
           Clients
         </h1>
-
-        <div 
-          className="px-2 sm:px-4"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
+        <div className="max-w-7xl mx-auto overflow-hidden">
+          <style>{`
+            .slick-track {
+              display: flex !important;
+              align-items: center;
+            }
+            .slick-slide {
+              display: flex !important;
+              justify-content: center;
+              align-items: center;
+              float: left;
+            }
+            .slick-slide > div {
+              width: 100%;
+              display: flex;
+              justify-content: center;
+            }
+            @media (max-width: 480px) {
+              .slick-list {
+                overflow: hidden;
+              }
+              .slick-slide {
+                width: 100% !important;
+              }
+            }
+          `}</style>
           <Slider {...settings}>
             {clientLogos.map((client) => (
-              <div key={client.id} className="px-2 sm:px-2">
-                <div className="bg-white shadow-lg flex items-center justify-center h-20 w-full max-w-[200px] sm:max-w-[140px] md:max-w-[160px] mx-auto rounded-lg hover:shadow-xl transition-shadow duration-300">
+              <div key={client.id} className="px-2 sm:px-3">
+                <div className="bg-white shadow-md rounded flex items-center justify-center h-20 sm:h-24 w-full max-w-[160px] sm:max-w-[180px] mx-auto transition-transform hover:scale-105">
                   <img
                     src={client.src}
                     alt={client.alt}
-                    className="max-h-16 sm:max-h-14 md:max-h-16 w-auto object-contain p-3"
+                    className="max-h-14 sm:max-h-16 max-w-[120px] sm:max-w-[140px] object-contain p-2"
                   />
                 </div>
               </div>
