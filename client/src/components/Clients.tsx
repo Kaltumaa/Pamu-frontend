@@ -71,6 +71,16 @@ const ClientsSection: React.FC = () => {
         } 
       },
       { 
+        breakpoint: 640, 
+        settings: { 
+          slidesToShow: 1,
+          autoplaySpeed: 2000,
+          centerMode: false,
+          centerPadding: '0px',
+          arrows: isHovered,
+        } 
+      },
+      { 
         breakpoint: 480, 
         settings: { 
           slidesToShow: 1,
@@ -102,12 +112,12 @@ const ClientsSection: React.FC = () => {
         >
           <Slider {...settings}>
             {clientLogos.map((client) => (
-              <div key={client.id} className="px-1 sm:px-2">
-                <div className="bg-white shadow-lg flex items-center justify-center h-16 sm:h-18 md:h-20 w-full max-w-[120px] sm:max-w-[140px] md:max-w-[160px] mx-auto rounded-lg hover:shadow-xl transition-shadow duration-300">
+              <div key={client.id} className="px-2 sm:px-2">
+                <div className="bg-white shadow-lg flex items-center justify-center h-20 w-full max-w-[200px] sm:max-w-[140px] md:max-w-[160px] mx-auto rounded-lg hover:shadow-xl transition-shadow duration-300">
                   <img
                     src={client.src}
                     alt={client.alt}
-                    className="max-h-12 sm:max-h-14 md:max-h-16 w-auto object-contain p-2"
+                    className="max-h-16 sm:max-h-14 md:max-h-16 w-auto object-contain p-3"
                   />
                 </div>
               </div>
