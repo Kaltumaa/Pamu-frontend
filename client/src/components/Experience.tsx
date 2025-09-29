@@ -3,7 +3,7 @@ import "@/styles/experience.css";
 
 export default function Experience() {
   return (
-    <div className="experience-outer">
+    <div className="experience-outer font-sans">
       <section className="experience-ship-section">
         <div className="experience-content">
           {/* Left Content */}

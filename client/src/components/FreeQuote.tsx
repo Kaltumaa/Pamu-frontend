@@ -3,7 +3,12 @@ import "@/styles/Freequote.css";
 import businessmanImage from "@/assets/images/bg_1.jpg";
 import { submitQuote } from "@/api";
 
-const FreeQuote = ({ variant = "home" }) => {
+interface FreeQuoteProps {
+  variant?: "home" | "modal" | "embedded";
+  onClose?: () => void;
+}
+
+const FreeQuote = ({ variant = "home", onClose }: FreeQuoteProps) => {
   const [formData, setFormData] = useState({
     from: "",
     to: "",
@@ -58,13 +63,13 @@ const FreeQuote = ({ variant = "home" }) => {
   };
 
   const formContent = (
-    <form onSubmit={handleSubmit} className="quote-form space-y-3 w-full max-w-md mx-auto">
-      <div className="flex flex-col md:flex-row md:space-x-3 space-y-3 md:space-y-0">
+    <form onSubmit={handleSubmit} className="quote-form space-y-2 w-full max-w-xs mx-auto">
+      <div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0">
         <select
           name="from"
           value={formData.from}
           onChange={handleInputChange}
-          className="form-select flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
+          className="form-select flex-1 p-2 text-xs border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
           required
         >
           <option value="">From</option>
@@ -79,7 +84,7 @@ const FreeQuote = ({ variant = "home" }) => {
           name="to"
           value={formData.to}
           onChange={handleInputChange}
-          className="form-select flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
+          className="form-select flex-1 p-2 text-xs border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
           required
         >
           <option value="">To</option>
@@ -96,7 +101,7 @@ const FreeQuote = ({ variant = "home" }) => {
         name="freightType"
         value={formData.freightType}
         onChange={handleInputChange}
-        className="form-select w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
+        className="form-select w-full p-2 text-xs border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
         required
       >
         <option value="">Freight Type</option>
@@ -106,12 +111,12 @@ const FreeQuote = ({ variant = "home" }) => {
         <option value="land">Land Transport</option>
       </select>
 
-      <div className="flex flex-col md:flex-row md:space-x-3 space-y-3 md:space-y-0">
+      <div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0">
         <select
           name="containerType"
           value={formData.containerType}
           onChange={handleInputChange}
-          className="form-select flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
+          className="form-select flex-1 p-2 text-xs border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
           required
         >
           <option value="">Container Type</option>
@@ -126,7 +131,7 @@ const FreeQuote = ({ variant = "home" }) => {
           onChange={handleInputChange}
           placeholder="Qty"
           min={1}
-          className="form-input flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
+          className="form-input flex-1 p-2 text-xs border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
         />
       </div>
 
@@ -136,18 +141,18 @@ const FreeQuote = ({ variant = "home" }) => {
         value={formData.company}
         onChange={handleInputChange}
         placeholder="Company Name"
-        className="form-input w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
+        className="form-input w-full p-2 text-xs border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
         required
       />
 
-      <div className="flex flex-col md:flex-row md:space-x-3 space-y-3 md:space-y-0">
+      <div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0">
         <input
           type="email"
           name="email"
           value={formData.email}
           onChange={handleInputChange}
           placeholder="Email"
-          className="form-input flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
+          className="form-input flex-1 p-2 text-xs border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
           required
         />
         <input
@@ -156,7 +161,7 @@ const FreeQuote = ({ variant = "home" }) => {
           value={formData.phone}
           onChange={handleInputChange}
           placeholder="Phone"
-          className="form-input flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
+          className="form-input flex-1 p-2 text-xs border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
           required
         />
       </div>
@@ -166,8 +171,8 @@ const FreeQuote = ({ variant = "home" }) => {
         value={formData.specialRequirements}
         onChange={handleInputChange}
         placeholder="Special requirements (hazmat, temperature, customs, etc.)"
-        className="form-textarea w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
-        rows={3}
+        className="form-textarea w-full p-2 text-xs border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-600 transition"
+        rows={2}
       />
 
       {success && <p className="text-green-600 text-center">{success}</p>}
@@ -175,7 +180,7 @@ const FreeQuote = ({ variant = "home" }) => {
 
       <button
         type="submit"
-        className="w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition text-base font-medium"
+        className="w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition text-xs font-medium"
         disabled={loading}
       >
         {loading ? "Sending..." : "SEND MESSAGE →"}
@@ -186,23 +191,51 @@ const FreeQuote = ({ variant = "home" }) => {
   // ---------------- MODAL VERSION ----------------
   if (variant === "modal") {
     return (
-      <div className="flex flex-col md:flex-row w-full max-w-3xl mx-auto bg-white rounded-lg overflow-hidden shadow-xl">
-        <div className="hidden md:block md:w-1/2">
-          <img
-            src={businessmanImage}
-            alt="Business"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="w-full md:w-1/2 p-4 md:p-6 flex flex-col">
-          <div className="mb-4 text-left">
-            <span className="block text-sm font-semibold text-red-600 uppercase">
-              Request A
-            </span>
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Free Quote</h1>
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 z-50">
+        <div className="bg-white rounded-lg shadow-xl w-full max-w-sm max-h-[90vh] overflow-y-auto">
+          {/* Close button */}
+          <div className="flex justify-end p-2 pb-0">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (onClose) onClose();
+              }}
+              className="p-3 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors cursor-pointer"
+              aria-label="Close"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
           </div>
-          <div className="flex-grow">{formContent}</div>
+          
+          <div className="pb-4">
+            <div className="mb-2 text-center">
+              <span className="block text-xs font-semibold text-red-600 uppercase">
+                Request A
+              </span>
+              <h1 className="text-lg font-bold text-gray-900">Free Quote</h1>
+            </div>
+            {formContent}
+          </div>
         </div>
+      </div>
+    );
+  }
+
+  // ---------------- EMBEDDED VERSION (for use inside other modals) ----------------
+  if (variant === "embedded") {
+    return (
+      <div className="w-full">
+        <div className="mb-2 text-center">
+          <span className="block text-xs font-semibold text-red-600 uppercase">
+            Request A
+          </span>
+          <h1 className="text-lg font-bold text-gray-900">Free Quote</h1>
+        </div>
+        {formContent}
       </div>
     );
   }
@@ -210,15 +243,15 @@ const FreeQuote = ({ variant = "home" }) => {
   // ---------------- HOMEPAGE VERSION ----------------
 return (
   <section
-    className="free-quote-section py-16 relative min-h-[500px]"
+    className="free-quote-section py-6 md:py-12 relative min-h-[350px] md:min-h-[400px]"
     style={{ backgroundImage: `url(${businessmanImage})` }}
   >
     <div className="absolute inset-0 bg-black/30"></div>
-    <div className="container px-4 relative z-10">
-      <div className="quote-form-box max-w-lg bg-white p-9 rounded-lg shadow-lg min-h-[650px]">
-        <div className="mb-4 text-left">
-          <span className="block text-sm font-semibold text-black">Request A</span>
-          <h1 className="text-2xl md:text-3xl font-bold text-red-600">Free Quote</h1>
+    <div className="container relative z-10 flex justify-start">
+      <div className="quote-form-box w-full max-w-sm bg-white p-4 md:p-5 rounded-lg shadow-lg">
+        <div className="mb-2 text-left">
+          <span className="block text-xs font-semibold text-black">Request A</span>
+          <h1 className="text-lg md:text-xl font-bold text-red-600">Free Quote</h1>
         </div>
         {formContent}
       </div>

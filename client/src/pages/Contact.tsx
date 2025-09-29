@@ -12,19 +12,25 @@ const offices = [
   {
     city: "Mombasa HQ",
     address: "Mombasa Trade Center, 5th Floor, Nkrumah Road",
-    phone: "+254 718 610 546",
+    phone: "+254 758 002 383",
     email: "info@pamuservices.co.ke",
   },
   {
     city: "Nairobi",
     address: "Mirage Plaza, 1st Floor, Mombasa Road",
-    phone: "+254 723 127 599",
+    phone: "+254 740 329 273",
     email: "info@pamuservices.co.ke",
   },
   {
     city: "Juba",
     address: "City Mall, Malakia, Juba, South Sudan",
     phone: "+211 980 387 500",
+    email: "pamuservicesltd@gmail.com",
+  },
+  {
+    city: "Uganda",
+    address: "GNS Plaza, Gaddafi Road - Kampala, Uganda",
+    phone: "+256 775 138 324",
     email: "pamuservicesltd@gmail.com",
   },
 ];
@@ -99,51 +105,52 @@ const Contact: React.FC = () => {
 
       <ContactHero />
 
-      <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-16 grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {/* Contact Info */}
-        <div>
-          <h2 className="text-2xl font-bold mb-6">Our Offices</h2>
-          <div className="space-y-6">
-            {offices.map((office, index) => (
-              <div
-                key={index}
-                className="bg-white p-6 rounded-lg shadow hover:shadow-md transition"
-              >
-                <h3 className="text-xl font-semibold text-brand-dark mb-2">
-                  {office.city}
-                </h3>
-                <div className="flex items-center space-x-2 text-gray-600 mb-2">
-                  <MapPin className="h-5 w-5 text-primary" />
-                  <span>{office.address}</span>
+      <section className="max-w-6xl mx-auto py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Contact Info */}
+          <div className="flex flex-col">
+            <h2 className="text-2xl font-bold mb-6">Our Offices</h2>
+            <div className="space-y-4 flex-1">
+              {offices.map((office, index) => (
+                <div
+                  key={index}
+                  className="bg-white p-4 rounded-lg shadow hover:shadow-md transition"
+                >
+                  <h3 className="text-lg font-semibold text-brand-dark mb-2">
+                    {office.city}
+                  </h3>
+                  <div className="flex items-center space-x-2 text-gray-600 mb-2">
+                    <MapPin className="h-4 w-4 text-primary" />
+                    <span className="text-sm">{office.address}</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-gray-600 mb-2">
+                    <Phone className="h-4 w-4 text-primary" />
+                    <a href={`tel:${office.phone}`} className="hover:text-primary text-sm">
+                      {office.phone}
+                    </a>
+                  </div>
+                  <div className="flex items-center space-x-2 text-gray-600">
+                    <Mail className="h-4 w-4 text-primary" />
+                    <a
+                      href={`mailto:${office.email}`}
+                      className="hover:text-primary text-sm"
+                    >
+                      {office.email}
+                    </a>
+                  </div>
                 </div>
-                <div className="flex items-center space-x-2 text-gray-600 mb-2">
-                  <Phone className="h-5 w-5 text-primary" />
-                  <a href={`tel:${office.phone}`} className="hover:text-primary">
-                    {office.phone}
-                  </a>
-                </div>
-                <div className="flex items-center space-x-2 text-gray-600">
-                  <Mail className="h-5 w-5 text-primary" />
-                  <a
-                    href={`mailto:${office.email}`}
-                    className="hover:text-primary"
-                  >
-                    {office.email}
-                  </a>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* Contact Form */}
-        <div>
-          <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
-          <form
-            onSubmit={handleSubmit}
-            className="bg-white p-8 rounded-lg shadow space-y-6"
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Contact Form */}
+          <div className="flex flex-col">
+            <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
+            <form
+              onSubmit={handleSubmit}
+              className="bg-white p-6 rounded-lg shadow space-y-4 flex-1"
+            >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label
                   htmlFor="name"
@@ -155,7 +162,7 @@ const Contact: React.FC = () => {
                   id="name"
                   name="name"
                   type="text"
-                  className="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary text-sm"
                   placeholder="Enter your name"
                   required
                 />
@@ -171,7 +178,7 @@ const Contact: React.FC = () => {
                   id="email"
                   name="email"
                   type="email"
-                  className="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary text-sm"
                   placeholder="Enter your email"
                   required
                 />
@@ -183,7 +190,7 @@ const Contact: React.FC = () => {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Select a Service
               </label>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2">
                 {SERVICE_OPTIONS.map((service) => {
                   const selected = selectedService === service;
                   return (
@@ -191,7 +198,7 @@ const Contact: React.FC = () => {
                       key={service}
                       type="button"
                       aria-pressed={selected}
-                      className={`px-4 py-2 rounded-lg border text-sm transition ${
+                      className={`px-3 py-2 rounded-lg border text-sm transition ${
                         selected
                           ? "bg-primary text-white border-primary"
                           : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200"
@@ -220,27 +227,73 @@ const Contact: React.FC = () => {
               <textarea
                 id="message"
                 name="message"
-                rows={5}
-                className="mt-1 w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                rows={4}
+                className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary text-sm"
                 placeholder="Write your message..."
                 required
               ></textarea>
             </div>
 
             {/* Submit button + feedback */}
-            <div>
+            <div className="pt-2">
               <Button
                 type="submit"
-                className="w-full bg-primary hover:bg-primary/90"
+                className="w-full bg-primary hover:bg-primary/90 py-3 text-sm font-medium"
                 disabled={loading}
               >
                 {loading ? "Sending..." : "Send Message"}
               </Button>
 
-              {success && <p className="text-green-600 mt-3">{success}</p>}
-              {error && <p className="text-red-600 mt-3">{error}</p>}
+              {success && <p className="text-green-600 mt-2 text-sm">{success}</p>}
+              {error && <p className="text-red-600 mt-2 text-sm">{error}</p>}
             </div>
           </form>
+          </div>
+        </div>
+      </section>
+
+      {/* International Agents */}
+      <section className="py-6 bg-gray-50">
+        <div className="max-w-2xl mx-auto px-4">
+          <div className="text-center mb-4">
+            <h2 className="text-lg font-bold text-[#0C6088] mb-1">International Agent</h2>
+            <p className="text-gray-600 text-xs">Our trusted agent across the globe</p>
+          </div>
+          
+          <div className="flex justify-center">
+            {/* China Agent */}
+            <div className="bg-white p-4 rounded-lg shadow-md border-l-4 border-[#0C6088] w-full max-w-md">
+              <div className="flex items-center mb-3">
+                <div className="w-8 h-8 bg-[#0C6088]/10 rounded-full flex items-center justify-center mr-2">
+                  <span className="text-sm">🇨🇳</span>
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-[#0C6088]">China Agent</h3>
+                  <p className="text-gray-600 text-xs">Asia-Pacific Operations</p>
+                </div>
+              </div>
+              <div className="space-y-2 text-gray-700">
+                <div className="bg-gray-50 p-2 rounded-lg">
+                  <p className="font-semibold text-gray-900 mb-1 text-xs">Company</p>
+                  <p className="text-xs">SAM INTL LOGISTICS CO LIMITED</p>
+                </div>
+                <div className="bg-gray-50 p-2 rounded-lg">
+                  <p className="font-semibold text-gray-900 mb-1 text-xs">Address</p>
+                  <p className="text-xs">16/F, 2 Building, Yineng international plaza, No 2 Gullan North Road, Foshan City, China</p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <div className="flex-1 bg-gray-50 p-2 rounded-lg">
+                    <p className="font-semibold text-gray-900 mb-1 text-xs">Email</p>
+                    <a href="mailto:sam@gzyourlink.com" className="text-[#0C6088] hover:underline break-all text-xs">sam@gzyourlink.com</a>
+                  </div>
+                  <div className="flex-1 bg-gray-50 p-2 rounded-lg">
+                    <p className="font-semibold text-gray-900 mb-1 text-xs">Mobile</p>
+                    <a href="tel:+8613660769986" className="text-[#0C6088] hover:underline text-xs">+86 136 6076 9986</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -256,7 +309,7 @@ const Contact: React.FC = () => {
 
       {/* Got a Question Section */}
       <section className="relative py-1 bg-gradient-to-b from-black via-black to-gray-900 text-white">
-        <div className="max-w-5xl mx-auto px-4 pt-4 pb-4">
+        <div className="max-w-5xl mx-auto pt-4 pb-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-2">
             Got a Question?
           </h2>
@@ -291,7 +344,7 @@ const Contact: React.FC = () => {
                 href="tel:+254718610546"
                 className="text-gray-300 text-sm hover:text-primary"
               >
-                +254 718 610 546
+                +254 758 002 383
               </a>
             </div>
 

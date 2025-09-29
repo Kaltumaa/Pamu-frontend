@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import TopBar from "@/components/Topbar";
 import { ChevronDown } from "lucide-react";
 import logo from "@/assets/images/logo_footer.png";
 import FreeQuote from "@/components/FreeQuote"; // 👈 import FreeQuote modal
@@ -16,7 +15,6 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <TopBar />
 
       <nav className="bg-white border-b border-[#0C6088] shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -229,17 +227,7 @@ const Navbar: React.FC = () => {
 
       {/* Quote Modal */}
       {showQuote && (
-        <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-50">
-          <div className="bg-white w-full max-w-3xl p-6 rounded-lg shadow-lg relative">
-            <button
-              onClick={() => setShowQuote(false)}
-              className="absolute top-3 right-3 text-gray-600 hover:text-red-600 text-xl"
-            >
-              ✕
-            </button>
-            <FreeQuote variant="modal" /> {/* 👈 modal layout */}
-          </div>
-        </div>
+        <FreeQuote variant="modal" onClose={() => setShowQuote(false)} />
       )}
     </>
   );

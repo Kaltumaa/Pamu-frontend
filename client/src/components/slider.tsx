@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import banner1 from "@/assets/images/banner_slider.jpg";
 import banner2 from "@/assets/images/banner_slider_2.jpg";
-import { motion, AnimatePresence } from "framer-motion";
 
 const slides = [
   {
@@ -9,7 +8,7 @@ const slides = [
     image: banner1,
     title: "PAMU SERVICES LIMITED",
     subtitle: "From Pickup to Destination",
-    description: "Reliable Logistics & Transport Solutions Across Kenya",
+    description: "Reliable Logistics & Transport Solutions Across East Africa",
     button: "Learn More",
   },
   {
@@ -24,130 +23,133 @@ const slides = [
 
 const Slider: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [hovered, setHovered] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
-  // Auto slide every 10s
+  // Auto slide every 8 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 10000);
+    }, 8000);
     return () => clearInterval(interval);
   }, []);
 
-  // Alternate Ken Burns effect
-  const isZoomIn = currentSlide % 2 === 0;
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
 
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
-  const prevSlide = () =>
+  const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
 
   return (
-    <section
-      className="relative w-full h-screen overflow-hidden bg-white group"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={slides[currentSlide].id}
-          className="absolute inset-0 w-full h-full"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1 }}
-        >
-          {/* Ken Burns effect */}
-          <motion.div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `url(${slides[currentSlide].image})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-            initial={{ scale: isZoomIn ? 1 : 1.2 }}
-            animate={{ scale: isZoomIn ? 1.2 : 1 }}
-            transition={{ duration: 10, ease: "linear" }}
+    <section className="relative w-full h-screen overflow-hidden bg-gray-900">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 ease-in-out"
+        style={{
+          backgroundImage: `url(${slides[currentSlide].image})`,
+          transform: `scale(${currentSlide % 2 === 0 ? 1.1 : 1})`,
+        }}
+      />
+      
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black bg-opacity-40" />
+      
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4 sm:px-6 md:px-8">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 opacity-0 animate-fade-in">
+            {slides[currentSlide].title}
+          </h1>
+          
+          <p className="text-lg sm:text-xl md:text-2xl mb-4 opacity-0 animate-fade-in-delay-1">
+            {slides[currentSlide].subtitle}
+          </p>
+          
+          <p className="text-sm sm:text-base md:text-lg mb-8 max-w-2xl mx-auto opacity-0 animate-fade-in-delay-2">
+            {slides[currentSlide].description}
+          </p>
+          
+          <button className="px-6 py-3 bg-red-600 hover:bg-red-700 transition-colors duration-300 rounded-lg shadow-lg font-semibold opacity-0 animate-fade-in-delay-3">
+            {slides[currentSlide].button}
+          </button>
+        </div>
+      </div>
+
+      {/* Navigation Arrows */}
+      <button
+        onClick={prevSlide}
+        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black bg-opacity-40 hover:bg-opacity-70 text-white px-3 py-2 rounded-full transition-all duration-300 z-20"
+        aria-label="Previous slide"
+      >
+        &#10094;
+      </button>
+      
+      <button
+        onClick={nextSlide}
+        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-40 hover:bg-opacity-70 text-white px-3 py-2 rounded-full transition-all duration-300 z-20"
+        aria-label="Next slide"
+      >
+        &#10095;
+      </button>
+
+      {/* Slide Indicators */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              index === currentSlide 
+                ? 'bg-white' 
+                : 'bg-white bg-opacity-50 hover:bg-opacity-75'
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
           />
+        ))}
+      </div>
 
-          {/* Dark overlay */}
-          <div className="absolute inset-0 bg-black/40" />
-
-          {/* Text content */}
-          <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
-            <motion.h1
-              className="text-4xl md:text-6xl font-bold"
-              initial={{ y: -50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1 }}
-            >
-              {slides[currentSlide].title}
-            </motion.h1>
-            <motion.p
-              className="mt-4 text-lg md:text-2xl"
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.3 }}
-            >
-              {slides[currentSlide].subtitle}
-            </motion.p>
-            <motion.p
-              className="mt-2 text-sm md:text-lg max-w-2xl"
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.6 }}
-            >
-              {slides[currentSlide].description}
-            </motion.p>
-            <motion.button
-              className="mt-6 px-6 py-3 bg-red-600 hover:bg-red-700 transition rounded-lg shadow-lg"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.9 }}
-            >
-              {slides[currentSlide].button}
-            </motion.button>
-          </div>
-        </motion.div>
-      </AnimatePresence>
-
-      {/* Navigation buttons - fade in/out on hover */}
-      <AnimatePresence>
-        {hovered && (
-          <>
-            <motion.button
-              onClick={prevSlide}
-              className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black/40 text-white px-3 py-2 rounded-full hover:bg-black/70 transition z-20"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              &#10094;
-            </motion.button>
-            <motion.button
-              onClick={nextSlide}
-              className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black/40 text-white px-3 py-2 rounded-full hover:bg-black/70 transition z-20"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              &#10095;
-            </motion.button>
-          </>
-        )}
-      </AnimatePresence>
-
-      {/* Progress bar */}
-      <div className="absolute bottom-0 left-0 w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-        <motion.div
-          key={currentSlide}
-          initial={{ width: "0%" }}
-          animate={{ width: "100%" }}
-          transition={{ duration: 10, ease: "linear" }}
-          className="h-2 bg-gray-500 rounded-full"
+      {/* Progress Bar */}
+      <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-600">
+        <div 
+          className="h-full bg-white transition-all duration-100 ease-linear"
+          style={{ 
+            width: `${((Date.now() % 8000) / 8000) * 100}%` 
+          }}
         />
       </div>
+
+      {/* Custom CSS for animations */}
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes fade-in {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          
+          .animate-fade-in {
+            animation: fade-in 0.8s ease-out forwards;
+          }
+          
+          .animate-fade-in-delay-1 {
+            animation: fade-in 0.8s ease-out 0.2s forwards;
+          }
+          
+          .animate-fade-in-delay-2 {
+            animation: fade-in 0.8s ease-out 0.4s forwards;
+          }
+          
+          .animate-fade-in-delay-3 {
+            animation: fade-in 0.8s ease-out 0.6s forwards;
+          }
+        `
+      }} />
     </section>
   );
 };

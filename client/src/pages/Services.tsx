@@ -94,37 +94,54 @@ const Services: React.FC = () => {
       <ServicesHero />
 
       {/* Services Grid */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      <section className="py-12 md:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            Comprehensive logistics solutions tailored to your business needs across East Africa
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {services.map((service, index) => (
             <Link
               key={index}
               to={`/services/${service.key}`}
-              className="bg-white rounded-2xl shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex flex-col min-h-[420px]"
+              className="bg-white rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 flex flex-col group"
             >
               {/* Image */}
-              <img
-                src={service.image}
-                alt={service.title}
-                className="h-56 w-full object-cover rounded-t-2xl"
-              />
+              <div className="relative overflow-hidden rounded-t-xl">
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="h-48 w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+              </div>
 
               {/* Content */}
-              <div className="p-8 flex-1 flex flex-col">
-                <h3 className="text-2xl font-bold text-brand-dark mb-4">
+              <div className="p-6 flex-1 flex flex-col">
+                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 mb-6 flex-1">{service.description}</p>
+                <p className="text-gray-600 mb-4 text-sm leading-relaxed flex-1">{service.description}</p>
 
                 {/* Features */}
-                <ul className="space-y-3">
+                <ul className="space-y-2">
                   {service.features.map((feature, i) => (
                     <li key={i} className="flex items-center text-gray-600 text-sm">
-                      <CheckCircle className="h-5 w-5 text-primary mr-2" />
-                      {feature}
+                      <CheckCircle className="h-4 w-4 text-primary mr-2 flex-shrink-0" />
+                      <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
+                
+                {/* Learn More Link */}
+                <div className="mt-4 pt-4 border-t border-gray-100">
+                  <span className="text-primary text-sm font-medium group-hover:text-primary/80 transition-colors">
+                    Learn More →
+                  </span>
+                </div>
               </div>
             </Link>
           ))}

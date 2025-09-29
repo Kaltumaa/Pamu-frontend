@@ -15,22 +15,22 @@ export default function ServicesMarquee() {
   ];
 
   return (
-    <section className="bg-gray-50 py-20 overflow-hidden">
+    <section className="py-4 md:py-6 overflow-hidden">
       <div className="relative">
-        <div className="flex animate-marquee items-center whitespace-nowrap space-x-16 md:space-x-24">
+        <div className="flex animate-marquee items-center whitespace-nowrap space-x-6 md:space-x-12 lg:space-x-16">
           {services.concat(services).map((service, index) => (
             <div
               key={index}
-              className="flex items-center space-x-12 md:space-x-16"
+              className="flex items-center space-x-4 md:space-x-8 lg:space-x-12"
             >
               {/* Big text */}
-              <span className="text-[90px] md:text-[160px] font-extrabold text-gray-300 leading-none">
+              <span className="text-[40px] md:text-[60px] lg:text-[100px] font-extrabold text-gray-300 leading-none">
                 {service.title}
               </span>
 
               {/* Icon separator */}
-              <div className="flex items-center justify-center bg-blue-900 rounded-full w-28 h-28 md:w-32 md:h-32 flex-shrink-0">
-                <div className="text-white">{service.icon}</div>
+              <div className="flex items-center justify-center bg-blue-900 rounded-full w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24 flex-shrink-0">
+                <div className="text-white scale-75 md:scale-100">{service.icon}</div>
               </div>
             </div>
           ))}
@@ -38,7 +38,7 @@ export default function ServicesMarquee() {
       </div>
 
       {/* Marquee Animation */}
-      <style jsx>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @keyframes marquee {
           0% {
             transform: translateX(0%);
@@ -50,7 +50,7 @@ export default function ServicesMarquee() {
         .animate-marquee {
           animation: marquee 15s linear infinite;
         }
-      `}</style>
+      ` }} />
     </section>
   );
 }
