@@ -253,9 +253,11 @@
   }
   
   .ship-image {
-    width: 450px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 400px;
     height: auto;
+    display: block;
+    margin: 0 auto;
   }
   
   .experience-title {
@@ -294,8 +296,11 @@
   }
   
   .ship-image {
-    width: 350px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
   }
   
   .experience-title {
@@ -320,6 +325,20 @@
   
   .experience-right {
     gap: 35px;
+  }
+}
+
+@media (max-width: 360px) {
+  .ship-image {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .experience-content {
+    padding: 0 5px;
   }
 }
 

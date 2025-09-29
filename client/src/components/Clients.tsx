@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -12,6 +12,8 @@ import client7 from "@/assets/images/clients/client7.png";
 import bgImage from "@/assets/images/bg_3.jpg";
 
 const ClientsSection: React.FC = () => {
+  const [isHovered, setIsHovered] = useState(false);
+  
   const clientLogos = [
     { id: 1, src: client1, alt: "Client 1" },
     { id: 2, src: client2, alt: "Client 2" },
@@ -29,7 +31,7 @@ const ClientsSection: React.FC = () => {
     speed: 800,
     slidesToShow: 6,
     slidesToScroll: 1,
-    arrows: false,
+    arrows: isHovered,
     pauseOnHover: true,
     centerMode: false,
     variableWidth: false,
@@ -39,6 +41,7 @@ const ClientsSection: React.FC = () => {
         settings: { 
           slidesToShow: 5,
           autoplaySpeed: 3000,
+          arrows: isHovered,
         } 
       },
       { 
@@ -46,6 +49,7 @@ const ClientsSection: React.FC = () => {
         settings: { 
           slidesToShow: 4,
           autoplaySpeed: 3000,
+          arrows: isHovered,
         } 
       },
       { 
@@ -53,6 +57,7 @@ const ClientsSection: React.FC = () => {
         settings: { 
           slidesToShow: 3,
           autoplaySpeed: 2500,
+          arrows: isHovered,
         } 
       },
       { 
@@ -62,6 +67,7 @@ const ClientsSection: React.FC = () => {
           autoplaySpeed: 2500,
           centerMode: true,
           centerPadding: '20px',
+          arrows: isHovered,
         } 
       },
       { 
@@ -69,8 +75,9 @@ const ClientsSection: React.FC = () => {
         settings: { 
           slidesToShow: 1,
           autoplaySpeed: 2000,
-          centerMode: true,
-          centerPadding: '40px',
+          centerMode: false,
+          centerPadding: '0px',
+          arrows: isHovered,
         } 
       },
     ],
@@ -88,7 +95,11 @@ const ClientsSection: React.FC = () => {
           Clients
         </h1>
 
-        <div className="px-2 sm:px-4">
+        <div 
+          className="px-2 sm:px-4"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
           <Slider {...settings}>
             {clientLogos.map((client) => (
               <div key={client.id} className="px-1 sm:px-2">

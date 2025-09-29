@@ -24,13 +24,13 @@ const offices = [
   {
     city: "Juba",
     address: "City Mall, Malakia, Juba, South Sudan",
-    phone: "+211 980 387 500",
+    phone: "+254 723 127 599",
     email: "pamuservicesltd@gmail.com",
   },
   {
     city: "Uganda",
     address: "GNS Plaza, Gaddafi Road - Kampala, Uganda",
-    phone: "+256 775 138 324",
+    phone: "+256 775 138 324, +256 750 248 324",
     email: "pamuservicesltd@gmail.com",
   },
 ];
@@ -344,7 +344,7 @@ const Contact: React.FC = () => {
                 href="tel:+254718610546"
                 className="text-gray-300 text-sm hover:text-primary"
               >
-                +254 758 002 383
+                +254 740 329 273
               </a>
             </div>
 
